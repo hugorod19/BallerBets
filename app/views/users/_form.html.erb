@@ -1,0 +1,27 @@
+
+<center>
+<div>
+<%= form_with model: @user do  | f | %>
+</br></br>
+<h2> Email: <%= f.text_field :email %></h2>
+<h2> Display Name: <%= f.text_field :display_name%></h2>
+<h2>Password: <%= f.password_field :password%></h2>
+<h2>Password Confirmation: <%= f.password_field :password_confirmation%></h2>
+<h2> Select Your Favorite Teams </h2>
+<%= f.collection_select :basketball_team_id, @basketball, :id, :team_name, {include_blank: "-Basketball Team-"} %>
+</br></br>
+<%= f.collection_select :baseball_team_id, @baseball, :id, :team_name, {include_blank: "-Baseball Team-"} %>
+</br></br>
+<%= f.collection_select :football_team_id, @football, :id, :team_name, {include_blank: "-Football Team-"} %>
+</br></br>
+<%= f.collection_select :soccer_team_id, @soccer, :id, :team_name,  {include_blank: "-Soccer Team-"} %>
+</br></br>
+</br></br>
+ <div class="multi-button" style="width: 400px">
+
+<button onclick="window.location.href='<%= f.submit %>create user</button></a>
+ 
+</div>
+
+<% end %>  
+</center>

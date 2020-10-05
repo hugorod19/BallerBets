@@ -1,0 +1,37 @@
+<html>
+<head>
+
+
+<link rel="stylesheet" href="lib/assets/stylesheets/application.css">
+
+</head>
+<body>
+<center>
+<a href="/games"><%= image_tag("logos/picture.png", :class=> "zoom", :align=> "middle", width: '350px')%></a>
+</center>
+<ul>
+<li class="dropdown">
+    <a class="dropbtn">Games</a>
+    <div class="dropdown-content">
+      <a href="/games/soccer">Soccer</a>
+      <a href="/games/football">Football</a>
+      <a href="/games/basketball">Basketball</a>
+      <a href="/games/baseball">Baseball</a></div>
+<% if session[:id] != nil %>
+  <li><a href="/users/show">Personal Page</a></li>
+  <li><a href="/bets">Bets</a></li>
+  <li style="float:right"><a href="/logout">Logout</a></li>
+<% else %>
+  <li><a href="/users/new">New User</a></li>
+  <li><a href="/login">Login</a></li>
+<% end %>
+</ul>
+<center>
+<h1>Create New User</h1>
+
+<% flash.each do | key, v | %>
+<li style='color: red '> <%= v %> </li>
+<%end %>
+
+<%= render 'form' %>
+</center>

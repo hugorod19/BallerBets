@@ -1,0 +1,47 @@
+<html >
+<head>
+
+
+<link rel="stylesheet" href="lib/assets/stylesheets/application.css">
+
+</head>
+<body style="background-image: url(<%=@team.fan_art%>); background-size: cover;">
+<div>
+<center>
+<a href="/games"><%= image_tag("logos/picture.png", :class=> "zoom", :align=> "middle", width: '350px')%></a>
+</center>
+<ul>
+  <li class="dropdown">
+    <a class="dropbtn">Games</a>
+    <div class="dropdown-content">
+      <a href="/games/soccer">Soccer</a>
+      <a href="/games/football">Football</a>
+      <a href="/games/basketball">Basketball</a>
+      <a href="/games/baseball">Baseball</a>
+<% if session[:id] != nil %>
+  <li><a href="/users/show">Personal Page</a></li>
+  <li><a href="/bets">Bets</a></li>
+  <li>
+  
+  </li>
+  <li style="float:right"><a href="/logout">Logout</a></li>
+<% else %>
+  <li><a href="/users/new">New User</a></li>
+  <li><a href="/login">Login</a></li>
+<% end %>
+</ul>
+<center>
+<img src = <%= @team.banner %> width="100%" class="fade" >
+<br/><br/>
+<div class="bets">
+<h1><a href= "https://<%=@team.website%>" target="_blank">Official <%=@team.team_name%> Website</a></h1>
+<br/><br/>
+<h2>Descrition of team: </h2>
+<p style="width:70%"><%= @team.description %></p>
+<h3>Stadium: <%= @team.stadium_name %></h3>
+<br/><br/>
+<img src = <%= @team.stadium_img%> alt="Picture of Stadium" width="500" heigth="500" >
+</div></div>
+
+<br/><br/>
+</center>

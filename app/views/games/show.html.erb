@@ -1,0 +1,64 @@
+<html>
+<head>
+
+
+<link rel="stylesheet" href="lib/assets/stylesheets/application.css">
+
+</head>
+<body>
+<center>
+<a href="/games"><%= image_tag("logos/picture.png", :class=> "zoom", :align=> "middle", width: '350px')%></a>
+</center>
+<ul>
+<li class="dropdown">
+    <a class="dropbtn">Games</a>
+    <div class="dropdown-content">
+      <a href="/games/soccer">Soccer</a>
+      <a href="/games/football">Football</a>
+      <a href="/games/basketball">Basketball</a>
+      <a href="/games/baseball">Baseball</a>
+<% if session[:id] != nil %>
+  <li><a href="/users/show">Personal Page</a></li>
+  <li><a href="/bets">Bets</a></li>
+  <li style="float:right"><a href="/logout">Logout</a></li>
+<% else %>
+  <li><a href="/users/new">New User</a></li>
+  <li><a href="/login">Login</a></li>
+<% end %>
+</ul>
+<center>
+</br></br></br></br></br></br>
+<h1> <%= @game.away_team.team_name %> at <%= @game.home_team.team_name %> </h1>
+<a href="/teams/<%=@game.away_team_id%>"><img src = <%= @game.away_team.banner %> class="fade" width="50%" ></a><a href="/teams/<%= @game.home_team_id %>"><img src = <%= @game.home_team.banner %> class="fade" width="50%" ></a>
+
+
+<div class="bets">
+<h3 style='color: green'><%= flash[:congrats] %></h3>
+<h3>Date: <%= @game.date %></h3>
+
+<h3>Stadium: <%= @game.home_team.stadium_name %></h3>
+<br/><br/>
+<img src = <%= @game.home_team.stadium_img%> alt="Picture of Stadium" width="500" heigth="500" >
+
+</br>
+</br>
+
+<h3><%= @game.away_team.team_name %> Last Game</h3>
+<%= @game.away_team.games.last.result %>
+</br>
+</br>
+<h3><%= @game.home_team.team_name %> Last Game</h3>
+<%= @game.home_team.games.last.result %>
+</br>
+</br>
+</div>
+</br>
+</br>
+ <div class="multi-button" style="width: 400px">
+
+<button onclick="window.location.href='/bets/new?game_id=<%=@game.id%>';">Make New Bet</button></a>
+ </div>
+</div>
+</br>
+</br>
+<center>

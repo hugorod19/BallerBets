@@ -1,0 +1,73 @@
+<html>
+<head>
+<link rel="stylesheet" href="lib/assets/stylesheets/application.css">
+</head>
+<body>
+<center>
+<a href="/games"><%= image_tag("logos/picture.png", :class=> "zoom", :align=> "middle", width: '350px')%></a>
+</center>
+<ul>
+  <li class="dropdown">
+    <a class="dropbtn">Games</a>
+    <div class="dropdown-content">
+      <a href="/games/soccer">Soccer</a>
+      <a href="/games/football">Football</a>
+      <a href="/games/basketball">Basketball</a>
+      <a href="/games/baseball">Baseball</a>
+<% if session[:id] != nil %>
+  <li><a href="/users/show">Personal Page</a></li>
+  <li><a href="/bets">Bets</a></li>
+  <li style="float:right"><a href="/logout">Logout</a></li>
+<% else %>
+  <li><a href="/users/new">New User</a></li>
+  <li><a href="/login">Login</a></li>
+<% end %>
+</ul>
+<center>
+<% if @user != nil %>
+<h1 style="color:white"><%= @user.display_name %></h1>
+<p><a href="/teams/<%=@basketball.id%>"><img src = <%= @basketball.badge %> class="zoom" width="50" heigth="50" ></a>
+<a href="/teams/<%=@football.id%>"><img src = <%= @football.badge %> class="zoom" width="50" heigth="50" ></a>
+<a href="/teams/<%=@baseball.id%>"><img src = <%= @baseball.badge %> class="zoom" width="50" heigth="50" ></a>
+<a href="/teams/<%=@soccer.id%>"><img src = <%= @soccer.badge %> class="zoom" width="50" heigth="50" ></a>
+<br></p>
+</center>
+<%else%>
+<br><br><br><br>
+<%end%>
+<br>
+
+<center>
+<h1 style="color:white"> Today's games: </h1>
+
+<% @games_today.each do |g| %>
+<div class="bets">
+<a href="/teams/<%=g.away_team.id%>"><img src = <%= g.away_team.badge %> class="zoom" width="80" heigth="80" ></a> at <a href="/teams/<%=g.home_team.id%>"><img src = <%= g.home_team.badge %> class="zoom" width="80" heigth="80" ></a>
+
+<p><%= g.away_team.team_name + " vs "+ g.home_team.team_name + " on " +g.date%> </p>
+
+ <div class="multi-button">
+<button onclick="window.location.href='/games/<%=g.id%>';">View Game</button></a>
+<button onclick="window.location.href='/bets/new?game_id=<%=g.id%>';">Make New Bet</button></a>
+ </div>
+</div>
+
+<% end %>
+<h1 style="color:white"> Tomorrow's games: </h1>
+
+<% @games_tomorrow.each do |g| %>
+<div class="bets">
+<a href="/teams/<%=g.away_team.id%>"><img src = <%= g.away_team.badge %> class="zoom" width="80" heigth="80" ></a> at <a href="/teams/<%=g.home_team.id%>"><img src = <%= g.home_team.badge %> class="zoom" width="80" heigth="80" ></a>
+
+<p><%= g.away_team.team_name + " vs "+ g.home_team.team_name + " on " +g.date%> </p>
+
+ <div class="multi-button">
+<button onclick="window.location.href='/games/<%=g.id%>';">View Game</button></a>
+<button onclick="window.location.href='/bets/new?game_id=<%=g.id%>';">Make New Bet</button></a>
+ </div>
+</div>
+
+<% end %>
+
+</center>
+</body>

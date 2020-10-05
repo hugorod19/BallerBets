@@ -1,0 +1,19 @@
+<div>
+<center>
+<%= form_with model: @bet do  | f | %>
+</br></br>
+<h2>Amount: $ <%= f.number_field :amount, min: 1 %></h2>
+</br></br>
+<h2>Team: <%= f.collection_select :team_id, @teams, :id, :team_name,  {include_blank: "-Pick a Team-"} %><h2>
+</br></br>
+ <div class="multi-button" style="width: 400px">
+
+<button onclick="window.location.href='<%= f.submit %>create bet</button></a>
+ 
+</div></div></br></br>
+
+<% end %>  
+</center>
+
+
+
